@@ -1,15 +1,6 @@
 function solution(survey, choices) {
   let personalType = "";
-  const types = {
-    R: 0,
-    T: 0,
-    C: 0,
-    F: 0,
-    J: 0,
-    M: 0,
-    A: 0,
-    N: 0,
-  };
+  const types = { R: 0, T: 0, C: 0, F: 0, J: 0, M: 0, A: 0, N: 0, };
 
   for (let i = 0; i < survey.length; i++) {
     const arr = survey[i].split("");
