@@ -1,6 +1,6 @@
 function solution(survey, choices) {
   let answer = '';
-  const { R, T, C, F, J, M, A, N } = { R: 0, T: 0, C: 0, F: 0, J: 0, M: 0, A: 0, N: 0 };
+  const mbti = { R: 0, T: 0, C: 0, F: 0, J: 0, M: 0, A: 0, N: 0 };
 
   choices.forEach((choice, i) => {
     if (choice <= 4) {
@@ -10,6 +10,7 @@ function solution(survey, choices) {
     }
   });
 
+  const { R, T, C, F, J, M, A, N } = mbti;
   answer += R >= T ? 'R' : 'T';
   answer += C >= F ? 'C' : 'F';
   answer += J >= M ? 'J' : 'M';
