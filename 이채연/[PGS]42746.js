@@ -1,0 +1,8 @@
+function solution(numbers) {
+  const answer = numbers
+    .map((n) => n.toString())
+    .sort((a, b) => b + a - (a + b))
+    .join('');
+
+  return answer;
+}
