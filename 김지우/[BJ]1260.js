@@ -9,9 +9,9 @@ for (let i = 0; i < M; i++) {
   graph[from].push(to);
   graph[to].push(from);
 }
-graph.forEach((v) => {
-  v.sort((a, b) => a - b);
-});
+
+graph.forEach((v) => v.sort((a, b) => a - b));
+console.log(graph);
 
 let visited = Array(N + 1).fill(false);
 let dfsAns = [];
@@ -25,6 +25,7 @@ function dfs(v) {
     if (!visited[next]) dfs(next);
   }
 }
+
 dfs(V);
 console.log(dfsAns.join(" "));
 
