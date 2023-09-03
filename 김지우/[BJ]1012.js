@@ -33,25 +33,25 @@ function solution(maps) {
   return results;
 }
 
-function bfs(map, x, y) {
+function bfs(map, y, x) {
   const queue = [];
   const dx = [1, -1, 0, 0];
   const dy = [0, 0, 1, -1];
 
-  queue.push([x, y]);
-  map[x][y] = 0; // 감염
+  queue.push([y, x]);
+  map[y][x] = 0; // 감염
 
   while (queue.length > 0) {
-    const [curX, curY] = queue.shift();
+    const [curY, curX] = queue.shift();
 
     for (let i = 0; i < 4; i++) {
-      const newX = curX + dx[i];
       const newY = curY + dy[i];
+      const newX = curX + dx[i];
 
-      if (newX >= 0 && newY >= 0 && newX < map.length && newY < map[0].length && map[newX][newY] === 1) {
+      if (newY >= 0 && newX >= 0 && newY < map.length && newX < map[0].length && map[newY][newX] === 1) {
         // 인접한 배추를 발견하면 감염 처리하고 큐에 추가
-        map[newX][newY] = 0; // 감염
-        queue.push([newX, newY]);
+        map[newY][newX] = 0; // 감염
+        queue.push([newY, newX]);
       }
     }
   }
