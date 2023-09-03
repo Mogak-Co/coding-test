@@ -1,1 +1,1 @@
-let visited = {};
+graph[to].push(from);
