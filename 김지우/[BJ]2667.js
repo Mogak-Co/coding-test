@@ -9,16 +9,15 @@ function bfs(x, y) {
   const queue = [[x, y]];
   visited[[x, y]] = true;
   let dx = [0, 0, 1, -1];
-  let dy = [-1, 1, 0, 0]; // 아래, 위, 오른, 왼
+  let dy = [1, -1, 0, 0];
   let cnt = 1;
-
   while (queue.length) {
     for (let i = 0; i < queue.length; i++) {
       let X = queue.shift();
       for (let j = 0; j < 4; j++) {
         let nx = X[0] + dx[j];
         let ny = X[1] + dy[j];
-        if (nx >= 0 && ny >= 0 && nx < arr.length && ny < arr.length && arr[nx][ny] === 1 && !visited[[nx, ny]]) {
+        if (nx >= 0 && ny >= 0 && nx < N && ny < N && arr[nx][ny] === 1 && !visited[[nx, ny]]) {
           visited[[nx, ny]] = true;
           cnt++;
           queue.push([nx, ny]);
@@ -35,7 +34,6 @@ for (let i = 0; i < N; i++) {
     if (arr[i][j] === 1 && !visited[[i, j]]) answer.push(bfs(i, j));
   }
 }
-
 console.log(answer.length);
 answer.sort((a, b) => a - b);
-answer.forEach((item) => console.log(item));
+answer.forEach((v) => console.log(v));

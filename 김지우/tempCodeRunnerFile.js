@@ -1,1 +1,1 @@
-          visitedCoords[[nx, ny]] = true;
+let visited = {};
