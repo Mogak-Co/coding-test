@@ -1,1 +1,1 @@
-graph[to].push(from);
+const size = queue.length;
