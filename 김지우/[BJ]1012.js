@@ -35,8 +35,8 @@ function solution(maps) {
 
 function bfs(map, y, x) {
   const queue = [];
-  const dx = [1, -1, 0, 0];
-  const dy = [0, 0, 1, -1];
+  const dy = [1, -1, 0, 0];
+  const dx = [0, 0, 1, -1];
 
   queue.push([y, x]);
   map[y][x] = 0; // 감염
