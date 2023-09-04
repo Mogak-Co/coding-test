@@ -12,7 +12,7 @@ function bfs(y, x) {
   while (queue.length) {
     ans++;
     const size = queue.length;
-    // 현재 레벨의 큐 사이즈를 고정해야 함 아래 push로 인해 바뀌지 않게
+    // 현재 큐의 크기를 저장하여 한 레벨의 원소만 처리
     for (let i = 0; i < size; i++) {
       let [Y, X] = queue.shift();
       if (visited[Y][X]) continue;
