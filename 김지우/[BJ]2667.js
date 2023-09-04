@@ -12,7 +12,8 @@ function bfs(x, y) {
   let dy = [1, -1, 0, 0];
   let cnt = 1;
   while (queue.length) {
-    for (let i = 0; i < queue.length; i++) {
+    let size = queue.length; // 현재 큐의 크기를 저장하여 한 레벨의 원소만 처리 (최적화: 큐의 크기가 작아짐)
+    for (let i = 0; i < size; i++) {
       let X = queue.shift();
       for (let j = 0; j < 4; j++) {
         let nx = X[0] + dx[j];
