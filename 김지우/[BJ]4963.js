@@ -26,14 +26,12 @@ const howManyIslands = () => {
 const bfs = (Y, X) => {
   let dy = [1, 1, 1, 0, 0, -1, -1, -1];
   let dx = [-1, 0, 1, -1, 1, -1, 0, 1];
-  const queue = [[Y, X]];
+  let queue = [[Y, X]];
   while (queue.length) {
-    const [curY, curX] = queue.shift();
-
+    let [curY, curX] = queue.shift();
     for (let i = 0; i < 8; i++) {
       let newY = curY + dy[i];
       let newX = curX + dx[i];
-
       if (newY >= 0 && newX >= 0 && newY < H && newX < W && !visited[newY][newX] && graph[newY][newX]) {
         visited[newY][newX] = true;
         queue.push([newY, newX]);
@@ -42,11 +40,10 @@ const bfs = (Y, X) => {
   }
 };
 
-for (let idx = 0; idx < input.length - 1; idx++) {
-  [W, H] = input[idx];
-  graph = input.slice(idx + 1, idx + H + 1);
-  idx += H;
+for (let i = 0; i < input.length - 1; i++) {
+  [W, H] = input[i];
+  graph = input.slice(i + 1, i + 1 + H);
   visited = Array.from(Array(H), () => Array(W).fill(false));
-
+  i += H;
   howManyIslands();
 }
