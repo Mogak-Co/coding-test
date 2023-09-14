@@ -9,6 +9,8 @@ let ans = 0;
 
 function bfs(y, x) {
   const queue = [[y, x]];
+  const dy = [0, 0, 1, -1];
+  const dx = [1, -1, 0, 0];
   while (queue.length) {
     ans++;
     const size = queue.length;
@@ -18,11 +20,15 @@ function bfs(y, x) {
       if (visited[Y][X]) continue;
       map[Y][X] = 0;
       visited[Y][X] = true;
-      if (Y > 0 && map[Y - 1][X] === 1) queue.push([Y - 1, X]);
-      if (X > 0 && map[Y][X - 1] === 1) queue.push([Y, X - 1]);
-      if (Y < N - 1 && map[Y + 1][X] === 1) queue.push([Y + 1, X]);
-      if (X < M - 1 && map[Y][X + 1] === 1) queue.push([Y, X + 1]);
-      if (Y === N - 1 && X === M - 1) return ans;
+
+      for (let i = 0; i < 4; i++) {
+        let newY = Y + dy[i];
+        let newX = X + dx[i];
+        if (newY >= 0 && newX >= 0 && newY < N && newX < M && map[newY][newX]) {
+          queue.push([newY, newX]);
+        }
+        if (newY === N - 1 && newX === M - 1) return ans++;
+      }
     }
   }
 }
