@@ -11,7 +11,7 @@ for (let i = 0; i < M; i++) {
 }
 
 graph.forEach((v) => v.sort((a, b) => a - b));
-console.log(graph);
+// console.log(graph);
 
 let visited = Array(N + 1).fill(false);
 let dfsAns = [];
@@ -34,9 +34,10 @@ let bfsAns = [];
 
 function bfs(v) {
   let queue = [v];
-  visited[v] = true;
+
   while (queue.length) {
     let cur = queue.shift();
+    visited[v] = true;
     bfsAns.push(cur);
     for (let i = 0; i < graph[cur].length; i++) {
       let next = graph[cur][i];
