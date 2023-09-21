@@ -4,7 +4,7 @@ let input = fs.readFileSync(filePath).toString().trim().split("\n");
 const N = input.shift();
 const arr = input.map((v) => v.split("").map(Number));
 const visited = {};
-
+//test
 function bfs(x, y) {
   const queue = [[x, y]];
   visited[[x, y]] = true;
