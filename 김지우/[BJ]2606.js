@@ -4,9 +4,10 @@ let input = fs.readFileSync(filePath).toString().trim().split("\n");
 
 const comNums = +input.shift();
 const pairs = +input.shift();
-const graph = Array.from(Array(comNums + 1), () => Array());
+
+const graph = Array.from(Array(comNums + 1), () => []);
 for (let i = 0; i < pairs; i++) {
-  const [from, to] = input[i].split(" ");
+  let [from, to] = input[i].split(" ").map(Number);
   graph[from].push(to);
   graph[to].push(from);
 }
@@ -20,7 +21,8 @@ function dfs(v) {
   dfsAns.push(v);
   for (let i = 0; i < graph[v].length; i++) {
     let next = graph[v][i];
-    if (!visited[next]) dfs(next);
+    if (visited[next]) continue;
+    dfs(next);
   }
 }
 
