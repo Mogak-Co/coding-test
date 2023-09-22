@@ -12,16 +12,14 @@ let ans = 0,
 arr.sort((a, b) => a - b);
 
 while (start < end) {
-  let sum = arr[start] + arr[end];
+  const sum = arr[start] + arr[end];
   if (sum === X) {
     ans++;
     start++;
     end--;
-  } else if (sum < X) {
-    start++;
-  } else {
-    end--;
   }
+  if (sum > X) end--;
+  if (sum < X) start++;
 }
 
 console.log(ans);
