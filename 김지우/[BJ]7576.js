@@ -7,9 +7,10 @@ let map = input.map((v) => v.split(" ").map(Number));
 let visited = Array.from(Array(N), () => Array(M).fill(false));
 let cnt = 0;
 let starts = [];
+
 for (let i = 0; i < N; i++) {
   for (let j = 0; j < M; j++) {
-    if (map[i][j] === 1) {
+    if (map[i][j]) {
       starts.push([i, j]);
       visited[i][j] = true;
     }
@@ -22,7 +23,7 @@ function bfs() {
   let dy = [1, -1, 0, 0];
   while (queue.length) {
     let size = queue.length;
-    let newQueue = [];
+    let newQueue = []; // 큐를 복사 초기화 할 필요 없이 다음 단계를 바로 준비
     for (let i = 0; i < size; i++) {
       let [Y, X] = queue[i];
       for (let j = 0; j < 4; j++) {
