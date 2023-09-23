@@ -24,8 +24,8 @@ function dfs(v) {
 
 for (let i = 1; i <= N; i++) {
   if (!visited[i]) {
-    cnt++;
     dfs(i);
+    cnt++;
   }
 }
 console.log(cnt);
