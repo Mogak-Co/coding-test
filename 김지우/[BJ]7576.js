@@ -7,10 +7,9 @@ let map = input.map((v) => v.split(" ").map(Number));
 let visited = Array.from(Array(N), () => Array(M).fill(false));
 let cnt = 0;
 let starts = [];
-
 for (let i = 0; i < N; i++) {
   for (let j = 0; j < M; j++) {
-    if (map[i][j]) {
+    if (map[i][j] === 1) {
       starts.push([i, j]);
       visited[i][j] = true;
     }
@@ -37,6 +36,7 @@ function bfs() {
       }
     }
     if (newQueue.length === 0) {
+      // 모든 0이 1로 바뀌었으면 종료
       return;
     }
     cnt++;
