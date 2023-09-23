@@ -6,18 +6,25 @@ const [N, K] = input.shift().split(" ").map(Number);
 
 let visited = Array(100001).fill(false);
 
-function bfs(x) {
-  let queue = [[x, 0]];
-  visited[x] = true;
+function bfs(start, end) {
+  let queue = [start];
+  let level = 0;
+  visited[start] = true;
   while (queue.length) {
-    let [cur, level] = queue.shift();
-    if (cur === K) return level;
-    for (let next of [cur - 1, cur + 1, cur * 2]) {
-      if (!visited[next] && next >= 0 && next <= 100000) {
-        visited[next] = true;
-        queue.push([next, level + 1]);
+    let size = queue.length;
+    for (let i = 0; i < size; i++) {
+      let cur = queue.shift();
+      if (cur === end) return level;
+      let nexts = [cur - 1, cur + 1, cur * 2];
+      for (let next of nexts) {
+        if (next >= 0 && next <= 100000 && !visited[next]) {
+          visited[next] = true;
+          queue.push(next);
+        }
       }
     }
+    level++;
   }
 }
-console.log(bfs(N));
+
+console.log(bfs(N, K));
