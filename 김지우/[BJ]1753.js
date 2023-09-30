@@ -19,21 +19,18 @@ function dijkstra(start) {
   dist[start] = 0;
 
   for (let i = 1; i <= V; i++) {
-    let cost = Infinity;
     let cur = 0;
 
     for (let j = 1; j <= V; j++) {
-      if (!visited[j] && cost > dist[j]) {
-        cost = dist[j];
+      if (!visited[j] && dist[cur] > dist[j]) {
         cur = j;
       }
     }
-
     visited[cur] = true;
 
     for (let j = 0; j < graph[cur].length; j++) {
-      let next = graph[cur][j].to;
-      let cost = graph[cur][j].cost;
+      const next = graph[cur][j].to;
+      const cost = graph[cur][j].cost;
 
       if (dist[next] > dist[cur] + cost) {
         dist[next] = dist[cur] + cost;
