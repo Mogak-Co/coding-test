@@ -11,11 +11,8 @@ let ans = 0,
   sum = 0;
 
 while (start < N) {
-  if (sum < M && end < N) {
-    sum += arr[end++];
-  } else {
-    sum -= arr[start++];
-  }
+  if (sum < M && end < N) sum += arr[end++];
+  else sum -= arr[start++];
   if (sum === M) ans++;
 }
 
