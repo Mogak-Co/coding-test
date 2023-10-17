@@ -8,7 +8,7 @@ let arr = input.map((v) => v.split(" ").map(Number));
 // 맨 아래층부터 위로 올라가면서 합을 구한다.
 
 for (let i = T - 1; i > 0; i--) {
-  for (let j = 0; j < arr[i].length - 1; j++) {
+  for (let j = 0; j < i; j++) {
     arr[i - 1][j] += Math.max(arr[i][j], arr[i][j + 1]);
   }
 }
