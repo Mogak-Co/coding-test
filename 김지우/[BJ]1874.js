@@ -13,11 +13,9 @@ for (let i = 1; i <= N; i++) {
   const num = +input[i];
 
   while (max <= num) {
-    stack.push(max);
+    stack.push(max++);
     result.push("+");
-    max++;
   }
-
   if (stack[stack.length - 1] === num) {
     stack.pop();
     result.push("-");
@@ -26,5 +24,4 @@ for (let i = 1; i <= N; i++) {
     return;
   }
 }
-
 console.log(result.join("\n"));
