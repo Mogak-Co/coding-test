@@ -1,1 +1,2 @@
-  console.log(str);
+
+  } else if (str === "size") {
