@@ -6,7 +6,7 @@ const bracket = input[0];
 const stack = [];
 
 // 쇠막대기의 개수
-let count = 0;
+let cnt = 0;
 
 for (let i = 0; i < bracket.length; i++) {
   if (bracket[i] === "(") {
@@ -15,11 +15,11 @@ for (let i = 0; i < bracket.length; i++) {
     stack.pop(); // 닫는 괄호는 무조건 pop
     if (bracket[i - 1] === "(") {
       // 레이저인 경우
-      count += stack.length; // stack에 남아있는 여는 괄호의 개수만큼 쇠막대기가 추가됨
+      cnt += stack.length; // stack에 남아있는 여는 괄호의 개수만큼 쇠막대기가 추가됨
     } else {
-      count += 1; // 쇠막대기의 끝인 경우
+      cnt++; // 쇠막대기의 끝인 경우
     }
   }
 }
 
-console.log(count);
+console.log(cnt);
