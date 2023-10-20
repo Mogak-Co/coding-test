@@ -1,2 +1,1 @@
-
-  } else if (str === "size") {
+  console.log(stack, result);
