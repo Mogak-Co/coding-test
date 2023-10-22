@@ -1,6 +1,6 @@
 const fs = require('fs')
 const filePath =
-    process.platform === 'linux' ? '/dev/stdin' : __dirname + '/input.txt'
+  process.platform === 'linux' ? '/dev/stdin' : __dirname + '/input.txt'
 let input = fs.readFileSync(filePath).toString()
 let T = +input
 
@@ -10,6 +10,6 @@ let T = +input
 
 let arr = [1, 3]
 for (let i = 2; i < T; i++) {
-    arr.push((arr[i - 1] + arr[i - 2] + arr[i - 2]) % 10007)
+  arr.push((arr[i - 1] + arr[i - 2] + arr[i - 2]) % 10007)
 }
 console.log(arr[T - 1])

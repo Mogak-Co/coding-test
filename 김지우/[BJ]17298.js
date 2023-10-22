@@ -1,6 +1,6 @@
 const fs = require('fs')
 const filePath =
-    process.platform === 'linux' ? '/dev/stdin' : __dirname + '/input.txt'
+  process.platform === 'linux' ? '/dev/stdin' : __dirname + '/input.txt'
 let input = fs.readFileSync(filePath).toString().trim().split('\n')
 
 // 오큰수
@@ -14,10 +14,10 @@ const result = new Array(N).fill(-1)
 // 비어있다면 비교할 대상이 없다는 뜻이므로 현재 원소의 인덱스를 스택에 push
 
 for (let i = 0; i < N; i++) {
-    while (stack.length && arr[stack[stack.length - 1]] < arr[i]) {
-        result[stack.pop()] = arr[i]
-    }
-    stack.push(i)
+  while (stack.length && arr[stack[stack.length - 1]] < arr[i]) {
+    result[stack.pop()] = arr[i]
+  }
+  stack.push(i)
 }
 
 console.log(result.join(' '))
