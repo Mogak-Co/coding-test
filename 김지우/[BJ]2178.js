@@ -1,11 +1,12 @@
-const fs = require("fs");
-const filePath = process.platform === "linux" ? "/dev/stdin" : __dirname + "/input.txt";
-let input = fs.readFileSync(filePath).toString().trim().split("\n");
+const fs = require('fs')
+const filePath =
+    process.platform === 'linux' ? '/dev/stdin' : __dirname + '/input.txt'
+let input = fs.readFileSync(filePath).toString().trim().split('\n')
 
-const [N, M] = input.shift().split(" ").map(Number);
-const map = input.map((line) => line.split("").map(Number));
-const visited = Array.from(Array(N), () => Array(M).fill(false));
-let ans = 0;
+const [N, M] = input.shift().split(' ').map(Number)
+const map = input.map((line) => line.split('').map(Number))
+const visited = Array.from(Array(N), () => Array(M).fill(false))
+let ans = 0
 
 // 맵 2차원 배열, 방문 2차원 배열, ans
 // bfs
@@ -30,28 +31,34 @@ let ans = 0;
 // console.log(ans);
 
 function bfs(y, x) {
-  const queue = [[y, x]];
-  const dy = [0, 0, 1, -1];
-  const dx = [1, -1, 0, 0];
-  while (queue.length) {
-    ans++;
-    const size = queue.length;
-    for (let i = 0; i < size; i++) {
-      let [Y, X] = queue.shift();
-      if (visited[Y][X]) continue;
-      map[Y][X] = 0;
-      visited[Y][X] = true;
-      for (let i = 0; i < 4; i++) {
-        let newY = Y + dy[i];
-        let newX = X + dx[i];
-        if (newY >= 0 && newX >= 0 && newY < N && newX < M && map[newY][newX]) {
-          queue.push([newY, newX]);
+    const queue = [[y, x]]
+    const dy = [0, 0, 1, -1]
+    const dx = [1, -1, 0, 0]
+    while (queue.length) {
+        ans++
+        const size = queue.length
+        for (let i = 0; i < size; i++) {
+            let [Y, X] = queue.shift()
+            if (visited[Y][X]) continue
+            map[Y][X] = 0
+            visited[Y][X] = true
+            for (let i = 0; i < 4; i++) {
+                let newY = Y + dy[i]
+                let newX = X + dx[i]
+                if (
+                    newY >= 0 &&
+                    newX >= 0 &&
+                    newY < N &&
+                    newX < M &&
+                    map[newY][newX]
+                ) {
+                    queue.push([newY, newX])
+                }
+                if (newY === N - 1 && newX === M - 1) return ans++
+            }
         }
-        if (newY === N - 1 && newX === M - 1) return ans++;
-      }
     }
-  }
 }
 
-bfs(0, 0);
-console.log(ans);
+bfs(0, 0)
+console.log(ans)

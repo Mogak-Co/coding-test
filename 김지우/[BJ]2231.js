@@ -1,24 +1,24 @@
-const fs = require("fs");
-const filePath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
-let input = fs.readFileSync(filePath).toString().trim();
+const fs = require('fs')
+const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt'
+let input = fs.readFileSync(filePath).toString().trim()
 
-const ans = [];
+const ans = []
 
 function d(n) {
-  const N = n.toString().split("").map(Number);
-  return n + N.reduce((a, c) => a + c);
+    const N = n.toString().split('').map(Number)
+    return n + N.reduce((a, c) => a + c)
 }
 
 for (let i = 1; i <= +input; i++) {
-  if (d(i) === +input) {
-    ans.push(i);
-  }
+    if (d(i) === +input) {
+        ans.push(i)
+    }
 }
 
 if (ans.length) {
-  console.log(Math.min(...ans));
+    console.log(Math.min(...ans))
 } else {
-  console.log(0);
+    console.log(0)
 }
 
 // node.js의 file system 모듈을 불러온다.
