@@ -1,17 +1,9 @@
-5 11
-baekjoononlinejudge
-startlink
-codeplus
-sundaycoding
-codingsh
-baekjoon
-codeplus
-codeminus
-startlink
-starlink
-sundaycoding
-codingsh
-codinghs
-sondaycoding
-startrink
-icerink
+2
+3
+hat headgear
+sunglasses eyewear
+turban headgear
+3
+mask face
+sunglasses face
+makeup face
