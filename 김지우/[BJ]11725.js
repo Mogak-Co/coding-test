@@ -13,7 +13,7 @@ for (let [from, to] of input) {
   graph[from].push(to)
   graph[to].push(from)
 }
-console.log(graph)
+// console.log(graph)
 // 이 요소의 부모는 누구이지?
 
 function dfs(start) {
