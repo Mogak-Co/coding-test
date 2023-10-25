@@ -13,16 +13,16 @@
 //   rl.close()
 // })
 
-const fs = require('fs')
+const fs = require('fs');
 const filePath =
-  process.platform === 'linux' ? '/dev/stdin' : __dirname + '/input.txt'
-let input = fs.readFileSync(filePath).toString()
+  process.platform === 'linux' ? '/dev/stdin' : __dirname + '/input.txt';
+let input = fs.readFileSync(filePath).toString();
 
-const set = new Set()
+const set = new Set();
 
 for (let i = 0; i < input.length; i++) {
   for (let j = i; j < input.length; j++) {
-    set.add(input.slice(i, j + 1))
+    set.add(input.slice(i, j + 1));
   }
 }
-console.log(set.size)
+console.log(set.size);

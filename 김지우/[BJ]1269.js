@@ -1,21 +1,21 @@
-const fs = require('fs')
+const fs = require('fs');
 const filePath =
-  process.platform === 'linux' ? '/dev/stdin' : __dirname + '/input.txt'
-let input = fs.readFileSync(filePath).toString().trim().split('\n')
+  process.platform === 'linux' ? '/dev/stdin' : __dirname + '/input.txt';
+let input = fs.readFileSync(filePath).toString().trim().split('\n');
 
-const [N, M] = input.shift().split(' ').map(Number)
-let ans = 0
+const [N, M] = input.shift().split(' ').map(Number);
+let ans = 0;
 
-const A = new Set(input.shift().split(' ').map(Number))
-const B = new Set(input.shift().split(' ').map(Number))
+const A = new Set(input.shift().split(' ').map(Number));
+const B = new Set(input.shift().split(' ').map(Number));
 
 for (let val of A) {
-  if (!B.has(val)) ans++
+  if (!B.has(val)) ans++;
 }
 for (let val of B) {
-  if (!A.has(val)) ans++
+  if (!A.has(val)) ans++;
 }
-console.log(ans)
+console.log(ans);
 
 // const [N, M] = input.shift().split(' ').map(Number)
 // const setA = input[0].split(' ')
