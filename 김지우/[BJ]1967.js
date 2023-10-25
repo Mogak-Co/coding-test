@@ -9,10 +9,10 @@ const N = +input.shift();
 // X에서 가장 먼 노드 Y를 찾으면
 // X와 Y 사이의 거리가 트리의 지름
 // [부모, 자식, 가중치]
+// X - 1 - Y
 
 const graph = Array.from(Array(N + 1), () => []);
 const visited = Array(N + 1).fill(false);
-const distance = Array(N + 1).fill(0);
 
 for (let i = 0; i < N - 1; i++) {
   const [parent, child, weight] = input[i].split(' ').map(Number);
@@ -23,9 +23,8 @@ for (let i = 0; i < N - 1; i++) {
 let max = 0;
 let maxIndex = 0;
 
-const dfs = (index, weight) => {
+function dfs(index, weight) {
   visited[index] = true;
-  distance[index] = weight;
 
   if (max < weight) {
     max = weight;
@@ -34,12 +33,9 @@ const dfs = (index, weight) => {
 
   for (let i = 0; i < graph[index].length; i++) {
     const [next, nextWeight] = graph[index][i];
-    if (!visited[next]) {
-      dfs(next, weight + nextWeight);
-    }
+    if (!visited[next]) dfs(next, weight + nextWeight);
   }
-};
-
+}
 dfs(1, 0);
 visited.fill(false);
 
