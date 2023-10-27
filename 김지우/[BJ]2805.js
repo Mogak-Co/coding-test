@@ -4,26 +4,29 @@ const filePath =
 let input = fs.readFileSync(filePath).toString().trim().split('\n');
 
 const [N, M] = input[0].split(' ').map(Number);
-let arr = input[1].split(' ').map(Number);
+const woods = input[1].split(' ').map(Number);
 
-let start = 0;
-let end = Math.max(...arr);
+// sum >= M 일 때
+// ans 는 mid 중에서도 최댓값
+
+let max = Math.max(...woods);
+let min = 0;
 let ans = 0;
 
-while (start <= end) {
-  let mid = Math.floor((start + end) / 2);
+while (min <= max) {
+  let mid = Math.floor((max + min) / 2);
+
   let sum = 0;
 
-  for (let val of arr) {
-    if (val > mid) sum += val - mid;
+  for (let wood of woods) {
+    if (wood > mid) sum += wood - mid;
   }
 
   if (sum >= M) {
     ans = Math.max(ans, mid);
-    start = mid + 1;
+    min = mid + 1;
   } else {
-    end = mid - 1;
+    max = mid - 1;
   }
 }
-
 console.log(ans);
