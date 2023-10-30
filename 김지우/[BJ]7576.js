@@ -16,13 +16,13 @@ for (let i = 0; i < N; i++) {
   }
 }
 
+let dy = [0, 0, -1, 1];
+let dx = [-1, 1, 0, 0];
+
 function bfs() {
-  let dy = [0, 0, -1, 1];
-  let dx = [-1, 1, 0, 0];
   while (queue.length) {
-    let size = queue.length;
     let newQueue = [];
-    for (let i = 0; i < size; i++) {
+    for (let i = 0; i < queue.length; i++) {
       let [Y, X] = queue[i];
       for (let j = 0; j < 4; j++) {
         let newY = Y + dy[j];
