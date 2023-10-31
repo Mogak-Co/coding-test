@@ -4,37 +4,32 @@ const filePath =
 let input = fs.readFileSync(filePath).toString().trim().split('\n');
 
 const [M, N, H] = input.shift().split(' ').map(Number);
-const boxes = Array.from(Array(H), () =>
-  Array.from(Array(N), () => Array.from(Array(M).fill(0)))
+const map = Array.from(Array(H), () =>
+  Array.from(Array(N), () => Array(M).fill(0))
 );
 
 for (let i = 0; i < H; i++) {
   for (let j = 0; j < N; j++) {
-    boxes[i][j] = input.shift().split(' ').map(Number);
+    map[i][j] = input.shift().split(' ').map(Number);
   }
 }
-
 let queue = [];
 let cnt = 0;
-
 for (let i = 0; i < H; i++) {
   for (let j = 0; j < N; j++) {
     for (let k = 0; k < M; k++) {
-      if (boxes[i][j][k] === 1) {
-        queue.push([i, j, k]);
-      }
+      if (map[i][j][k] === 1) queue.push([i, j, k]);
     }
   }
 }
+let dz = [1, -1, 0, 0, 0, 0];
+let dy = [0, 0, 1, -1, 0, 0];
+let dx = [0, 0, 0, 0, 1, -1];
 
 function bfs() {
-  let dz = [0, 0, 0, 0, -1, 1];
-  let dy = [0, 0, -1, 1, 0, 0];
-  let dx = [-1, 1, 0, 0, 0, 0];
   while (queue.length) {
-    let size = queue.length;
     let newQueue = [];
-    for (let i = 0; i < size; i++) {
+    for (let i = 0; i < queue.length; i++) {
       let [Z, Y, X] = queue[i];
       for (let j = 0; j < 6; j++) {
         let newZ = Z + dz[j];
@@ -47,9 +42,9 @@ function bfs() {
           newZ < H &&
           newY < N &&
           newX < M &&
-          boxes[newZ][newY][newX] === 0
+          map[newZ][newY][newX] === 0
         ) {
-          boxes[newZ][newY][newX] = 1;
+          map[newZ][newY][newX] = 1;
           newQueue.push([newZ, newY, newX]);
         }
       }
@@ -61,4 +56,5 @@ function bfs() {
 }
 
 bfs();
-console.log(boxes.flat(2).includes(0) ? -1 : cnt);
+
+console.log(map.flat(2).includes(0) ? -1 : cnt);
