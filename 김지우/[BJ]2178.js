@@ -30,15 +30,16 @@ let ans = 0;
 // bfs(0,0);
 // console.log(ans);
 
+const dy = [0, 0, 1, -1];
+const dx = [1, -1, 0, 0];
+
 function bfs(y, x) {
   const queue = [[y, x]];
-  const dy = [0, 0, 1, -1];
-  const dx = [1, -1, 0, 0];
   while (queue.length) {
     ans++;
     const size = queue.length;
     for (let i = 0; i < size; i++) {
-      let [Y, X] = queue.shift();
+      const [Y, X] = queue.shift();
       if (visited[Y][X]) continue;
       map[Y][X] = 0;
       visited[Y][X] = true;
