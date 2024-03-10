@@ -14,12 +14,12 @@ for (let i = 0; i < T; i++) {
   }
   for (let i = 1; i <= k; i++) {
     for (let j = 1; j <= n; j++) {
-      house[i][j] = house[i][j - 1] + house[i - 1][j];
+      house[i][j] = house[i - 1][j] + house[i][j - 1];
     }
   }
   console.log(house[k][n]);
 }
 
-// 1 4 10 20 35
-// 1 3 6 10 15
-// 1 2 3 4 5
+// 2층 1 4 10 20 35
+// 1층 1 3 6 10 15
+// 0층 1 2 3 4 5
