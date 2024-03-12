@@ -1,1 +1,1 @@
-queue.splice(0, size); // Clear the processed elements
+console.log(Math.max(...dp));
