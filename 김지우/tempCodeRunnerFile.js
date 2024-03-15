@@ -1,1 +1,1 @@
-visited[next] = true;
+)
