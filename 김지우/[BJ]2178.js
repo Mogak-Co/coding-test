@@ -14,9 +14,10 @@ let ans = 0;
 
 // while (queue.length) {
 // ans++
-// 현재 큐의 크기를 저장하여 한 레벨의 원소만 처리
 
 // size 만큼 for 문
+// size 변수로 고정하지 않으면 그 다음 요소들을 다음 레벨로 넘어가 처리하지 않음
+// 즉 현재 큐의 크기를 저장하여 한 레벨의 원소만 처리
 // shift 로 하나 빼와서 [Y, X] 방문 했으면 continue
 // map[Y][X] = 0; 되돌아가기 방지
 // visited[Y][X] = true;

@@ -1,46 +1,40 @@
 const fs = require('fs');
 const filePath =
-  process.platform === 'linux' ? '/dev/stdin' : __dirname + '/input.txt';
+  process.platform === 'linux' ? '/dev/stdin' : __dirname + '/[1]input.txt';
 let input = fs.readFileSync(filePath).toString().trim().split('\n');
 
-let [N, M, V] = input.shift().split(' ').map(Number);
-let graph = Array.from(Array(N + 1), () => []);
-for (let i = 0; i < M; i++) {
-  let [from, to] = input.shift().split(' ').map(Number);
-  graph[from].push(to);
-  graph[to].push(from);
-}
-graph.forEach((v) => v.sort((a, b) => a - b));
+let [N, M] = input.shift().split(' ').map(Number);
+let map = input.map((v) => v.split('').map(Number));
 
-let visited = Array(N + 1).fill(false);
-let dfsAns = [];
+let ans = 0;
+let visited = Array.from(Array(N), () => Array(M).fill(false));
 
-function dfs(v) {
-  if (visited[v]) return;
-  visited[v] = true;
-  dfsAns.push(v);
-  graph[v].forEach((next) => dfs(next));
-}
+let dy = [1, -1, 0, 0];
+let dx = [0, 0, 1, -1];
 
-dfs(V);
-console.log(dfsAns.join(' '));
-
-visited = Array(N + 1).fill(false);
-let bfsAns = [];
-
-function bfs(v) {
-  let queue = [v];
+function bfs(y, x) {
+  let queue = [[y, x]];
   while (queue.length) {
-    let cur = queue.shift();
-    visited[cur] = true;
-    bfsAns.push(cur);
-    graph[cur].forEach((next) => {
-      if (visited[next]) return;
-      visited[next] = true;
-      queue.push(next);
-    });
+    let size = queue.length;
+    ans++;
+    for (let i = 0; i < size; i++) {
+      let [Y, X] = queue.shift();
+      if (visited[Y][X]) continue;
+      visited[Y][X] = true;
+      map[Y][X] = 0;
+      for (let j = 0; j < 4; j++) {
+        let newY = Y + dy[j];
+        let newX = X + dx[j];
+        if (newY >= 0 && newX >= 0 && newY < N && newX < M && map[newY][newX]) {
+          queue.push([newY, newX]);
+        }
+        if (newY === N - 1 && newX === M - 1) {
+          return ans++;
+        }
+      }
+    }
   }
 }
 
-bfs(V);
-console.log(bfsAns.join(' '));
+bfs(0, 0);
+console.log(ans);
