@@ -21,9 +21,7 @@ function dfs(v) {
   if (visited[v]) return;
   visited[v] = true;
   dfsAns.push(v);
-  graph[v].forEach((next) => {
-    if (!visited[next]) dfs(next);
-  });
+  graph[v].forEach((next) => dfs(next));
 }
 
 dfs(V);
