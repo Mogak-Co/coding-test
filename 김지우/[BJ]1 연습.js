@@ -3,46 +3,62 @@ const filePath =
   process.platform === 'linux' ? '/dev/stdin' : __dirname + '/[1]input.txt';
 let input = fs.readFileSync(filePath).toString().trim().split('\n');
 
-let N = +input.shift();
-let map = input.map((v) => v.split('').map(Number));
-let visited = Array.from(Array(N), () => Array(N).fill(false));
+const T = +input.shift();
+const maps = [];
 
-let ans = [];
+for (let i = 0; i < T; i++) {
+  const [M, N, K] = input.shift().split(' ').map(Number);
+  const map = Array.from(Array(N), () => Array(M).fill(0));
+  for (let j = 0; j < K; j++) {
+    const [X, Y] = input.shift().split(' ').map(Number);
+    map[Y][X] = 1;
+  }
+  maps.push(map);
+}
 
-let dy = [1, -1, 0, 0];
-let dx = [0, 0, 1, -1];
+function solution(maps) {
+  const ans = [];
+  for (let map of maps) {
+    let cnt = 0;
+    for (let i = 0; i < map.length; i++) {
+      for (let j = 0; j < map[0].length; j++) {
+        if (map[i][j]) {
+          cnt++;
+          bfs(map, i, j);
+        }
+      }
+    }
+    ans.push(cnt);
+  }
+  return ans;
+}
 
-function bfs(y, x) {
-  let cnt = 0;
-  let queue = [[y, x]];
+function bfs(map, y, x) {
+  const queue = [[y, x]];
+  const dy = [1, -1, 0, 0];
+  const dx = [0, 0, 1, -1];
+  map[y][x] = 0;
   while (queue.length) {
     let size = queue.length;
     for (let i = 0; i < size; i++) {
       let [Y, X] = queue.shift();
-      if (visited[Y][X]) continue;
-      visited[Y][X] = true;
-      map[Y][X] = 0;
-      cnt++;
-      for (let j = 0; j < 4; j++) {
-        let [newY, newX] = [Y + dy[j], X + dx[j]];
-        if (newY >= 0 && newX >= 0 && newY < N && newX < N && map[newY][newX]) {
+      for (let i = 0; i < 4; i++) {
+        let newY = Y + dy[i];
+        let newX = X + dx[i];
+        if (
+          newY >= 0 &&
+          newX >= 0 &&
+          newY < map.length &&
+          newX < map[0].length &&
+          map[newY][newX]
+        ) {
           queue.push([newY, newX]);
+          map[newY][newX] = 0;
         }
       }
     }
   }
-  ans.push(cnt);
-  return;
 }
 
-for (let i = 0; i < N; i++) {
-  for (let j = 0; j < N; j++) {
-    if (map[i][j]) {
-      bfs(i, j);
-    }
-  }
-}
-
-ans.sort((a, b) => a - b);
-console.log(ans.length);
+const ans = solution(maps);
 ans.forEach((v) => console.log(v));
