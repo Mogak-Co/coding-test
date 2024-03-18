@@ -3,62 +3,49 @@ const filePath =
   process.platform === 'linux' ? '/dev/stdin' : __dirname + '/[1]input.txt';
 let input = fs.readFileSync(filePath).toString().trim().split('\n');
 
-const T = +input.shift();
-const maps = [];
+const [M, N] = input.shift().split(' ').map(Number);
+const map = input.map((v) => v.split(' ').map(Number));
 
-for (let i = 0; i < T; i++) {
-  const [M, N, K] = input.shift().split(' ').map(Number);
-  const map = Array.from(Array(N), () => Array(M).fill(0));
-  for (let j = 0; j < K; j++) {
-    const [X, Y] = input.shift().split(' ').map(Number);
-    map[Y][X] = 1;
-  }
-  maps.push(map);
-}
-
-function solution(maps) {
-  const ans = [];
-  for (let map of maps) {
-    let cnt = 0;
-    for (let i = 0; i < map.length; i++) {
-      for (let j = 0; j < map[0].length; j++) {
-        if (map[i][j]) {
-          cnt++;
-          bfs(map, i, j);
-        }
-      }
+let queue = [];
+for (let i = 0; i < N; i++) {
+  for (let j = 0; j < M; j++) {
+    if (map[i][j] === 1) {
+      queue.push([i, j]);
     }
-    ans.push(cnt);
   }
-  return ans;
 }
 
-function bfs(map, y, x) {
-  const queue = [[y, x]];
-  const dy = [1, -1, 0, 0];
-  const dx = [0, 0, 1, -1];
-  map[y][x] = 0;
+let dy = [0, 0, -1, 1];
+let dx = [-1, 1, 0, 0];
+
+function bfs() {
+  let cnt = 0;
   while (queue.length) {
+    let newQueue = [];
     let size = queue.length;
     for (let i = 0; i < size; i++) {
-      let [Y, X] = queue.shift();
-      for (let i = 0; i < 4; i++) {
-        let newY = Y + dy[i];
-        let newX = X + dx[i];
+      let [Y, X] = queue[i];
+      for (let j = 0; j < 4; j++) {
+        let newY = Y + dy[j];
+        let newX = X + dx[j];
         if (
           newY >= 0 &&
           newX >= 0 &&
-          newY < map.length &&
-          newX < map[0].length &&
-          map[newY][newX]
+          newY < N &&
+          newX < M &&
+          map[newY][newX] === 0
         ) {
-          queue.push([newY, newX]);
-          map[newY][newX] = 0;
+          map[newY][newX] = 1;
+          newQueue.push([newY, newX]);
         }
       }
     }
+    queue = newQueue;
+    cnt++;
   }
+  return cnt;
 }
 
-const ans = solution(maps);
-ans.forEach((v) => console.log(v));
+let cnt = bfs();
+let ans = map.flat().includes(0) ? -1 : cnt - 1; // 처음에 익은 토마토의 날짜를 제외하기
+console.log(ans);

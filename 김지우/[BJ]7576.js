@@ -1,13 +1,12 @@
 const fs = require('fs');
 const filePath =
-  process.platform === 'linux' ? '/dev/stdin' : __dirname + '/input.txt';
+  process.platform === 'linux' ? '/dev/stdin' : __dirname + '/[1]input.txt';
 let input = fs.readFileSync(filePath).toString().trim().split('\n');
 
 const [M, N] = input.shift().split(' ').map(Number);
 const map = input.map((v) => v.split(' ').map(Number));
 
 let queue = [];
-let cnt = 0;
 for (let i = 0; i < N; i++) {
   for (let j = 0; j < M; j++) {
     if (map[i][j] === 1) {
@@ -20,9 +19,11 @@ let dy = [0, 0, -1, 1];
 let dx = [-1, 1, 0, 0];
 
 function bfs() {
+  let cnt = 0;
   while (queue.length) {
     let newQueue = [];
-    for (let i = 0; i < queue.length; i++) {
+    let size = queue.length;
+    for (let i = 0; i < size; i++) {
       let [Y, X] = queue[i];
       for (let j = 0; j < 4; j++) {
         let newY = Y + dy[j];
@@ -39,13 +40,12 @@ function bfs() {
         }
       }
     }
-    if (newQueue.length === 0) return;
     queue = newQueue;
     cnt++;
   }
+  return cnt;
 }
 
-bfs();
-
-let ans = map.flat().includes(0) ? -1 : cnt;
+let cnt = bfs();
+let ans = map.flat().includes(0) ? -1 : cnt - 1; // 처음에 익은 토마토의 날짜를 제외하기
 console.log(ans);
